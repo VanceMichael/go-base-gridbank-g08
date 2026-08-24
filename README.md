@@ -13,8 +13,13 @@ The product theme is inspired by China News Service reporting on “算力超市
 ## Run locally
 
 ```bash
+cp .env.example .env
 GRIDBANK_DATABASE_PATH=./gridbank.db GOTOOLCHAIN=local go run ./cmd/server
 ```
+
+The example environment file contains local, non-secret defaults. Export the
+values your process needs before starting the server; the application does not
+implicitly load `.env` files.
 
 The server listens on `:8080` by default. Configuration uses environment variables:
 
@@ -52,6 +57,7 @@ Every mutation propagates the HTTP request context and request ID into services 
 ## Verification
 
 ```bash
+make verify
 GOTOOLCHAIN=local go test ./... -count=1
 GOTOOLCHAIN=local go test -race ./... -count=1
 GOTOOLCHAIN=local go vet ./...
